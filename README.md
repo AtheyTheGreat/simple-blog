@@ -1,66 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Laravel Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a skeleton application built on the Laravel framework. It provides a setup for a modern Laravel-based application with support for file uploads, database seeding, and media management.
 
-## About Laravel
+Features
+	•	Laravel Framework: Version 11.x
+	•	PHP 8.2+: Modern PHP features supported
+	•	MySQL 8: For database management
+	•	Media Management: Powered by Spatie’s Media Library
+	•	Query Builder: Advanced query filtering with Spatie’s Laravel Query Builder
+	•	Seeding: Preloaded with example articles and associated media
+	•	Docker Support: Full containerized setup with Laravel Sail
+	•	Frontend Development: Requires Node.js 22+ for asset compilation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Ensure the following are installed on your system:
+	•	PHP: Version 8.2 or higher
+	•	MySQL: Version 8
+	•	Node.js: Version 22 or higher
+	•	Composer: Latest version
+	•	Docker: (Optional, for Laravel Sail)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Installation
 
-## Learning Laravel
+Follow the steps below to set up and run the project:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the Repository
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+git clone <repository_url>
+cd <repository_folder>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Install Dependencies
 
-## Laravel Sponsors
+composer install
+npm install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. Configure Environment
 
-### Premium Partners
+Copy the example environment file and update the configuration:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+cp .env.example .env
 
-## Contributing
+Update the .env file with your database, application, and media storage settings.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Run Database Migrations
 
-## Code of Conduct
+php artisan migrate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Seed the Database
 
-## Security Vulnerabilities
+Seed the database with example articles and media:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+php artisan db:seed --class=ArticleSeeder
 
-## License
+Serving the Application
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Using Local PHP Server
+	1.	Start the development server:
+
+php artisan serve
+
+
+	2.	In a separate terminal, compile frontend assets:
+
+npm run dev
+
+
+
+Using Laravel Sail (Docker)
+	1.	Pull and build the containers:
+
+sail up -d
+
+
+	2.	Install dependencies with Docker:
+
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+
+
+	3.	Run migrations:
+
+sail artisan migrate
+
+
+	4.	Start the frontend dev server:
+
+npm run dev
+
+Development Commands
+	•	Artisan: Laravel’s command-line tool
+
+php artisan <command>
+
+
+	•	Frontend Assets:
+
+npm run dev
+
+
+	•	Docker (Sail):
+
+sail <command>
+
+Included Composer Packages
+	•	Spatie Media Library: Simplifies file uploads and management
+	•	Spatie Query Builder: Advanced query filtering
+	•	Laravel Tinker: Interactive shell for Laravel
+
+Example Seeder
+
+The project includes an example seeder (ArticleSeeder) that:
+	•	Creates 5 articles using Faker
+	•	Associates random images from the public/images directory with each article
+
+Requirements Summary
+
+Software	Version
+Laravel Framework	11.x
+PHP	8.2 or higher
+MySQL	8
+Node.js	22 or higher
+
+Running Seeder
+
+To populate the database with example articles:
+
+php artisan db:seed --class=ArticleSeeder
+
+Ensure that the public/images directory contains valid image files (jpg, jpeg, png).
+
+Contribution
+
+Feel free to fork the repo and submit pull requests for improvements or new features.
+
+License
+
+This project is licensed under the MIT License.
